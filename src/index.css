@@ -1,0 +1,61 @@
+@import url("./styles/normalize.css");
+
+:root {
+	--bg: #f2f2f2;
+	--bg-secondary: #ffffff;
+	--border: "#d8d8d8";
+	--primary: #4db8c6;
+	--secondary: #bde697;
+	--text: #212121;
+	--shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.05);
+
+	@media (prefers-color-scheme: dark) {
+		--bg: #010101;
+		--bg-secondary: #121212;
+		--border: "#272729";
+		--text: #e5e5e7;
+		--shadow: 0 2px 4px rgba(255, 255, 255, 0.05), 0 4px 8px rgba(255, 255, 255, 0.03);
+	}
+
+	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	font-weight: 400;
+
+	color: var(--text);
+	background-color: var(--bg);
+
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+}
+
+#app {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	height: min(100dvh, 100vh);
+	width: min(100dvw, 100vw);
+}
+
+.content {
+	height: 100%;
+	width: 100%;
+	order: 1;
+}
+
+.material-symbols-outlined {
+	font-variation-settings: "FILL" 1;
+}
+
+@media (max-width: 768px) {
+	body {
+		font-size: 14px;
+	}
+}
+
+/* @media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    scroll-behavior: auto !important;
+    transform: none !important;
+    transition: none !important;
+  }
+} */
