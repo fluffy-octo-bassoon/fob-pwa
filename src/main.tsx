@@ -1,15 +1,11 @@
+import "./index.css";
+
+import { CssBaseline, ThemeProvider } from "@mui/material";
 import { render } from "preact";
 import { ErrorBoundary, LocationProvider, Route, Router } from "preact-iso";
 import { Navigation } from "./components";
+import theme from "./constants/theme";
 import { CartPage, PlacesPage, ProfilePage } from "./routes";
-
-import "./index.css";
-
-const navElements = [
-	{ displayName: "Places", link: "/", icon: "explore" },
-	{ displayName: "Profile", link: "/profile", icon: "person" },
-	{ displayName: "Cart", link: "/cart", icon: "shopping_cart" },
-];
 
 const Routes = () => (
 	<ErrorBoundary>
@@ -23,12 +19,15 @@ const Routes = () => (
 
 const App = () => (
 	<>
-		<LocationProvider>
-			<main className="content">
-				<Routes />
-			</main>
-			<Navigation navElements={navElements} />
-		</LocationProvider>
+		<ThemeProvider theme={theme}>
+			<CssBaseline />
+			<LocationProvider>
+				<main className="content">
+					<Routes />
+				</main>
+				<Navigation />
+			</LocationProvider>
+		</ThemeProvider>
 	</>
 );
 

@@ -1,35 +1,35 @@
+import { BottomNavigation, BottomNavigationAction } from "@mui/material";
 import { useLocation } from "preact-iso";
-import styles from "./navigation.module.css";
+import { useState } from "preact/hooks";
 
-type navElement = {
-	displayName: string;
-	link: string;
-	icon?: string;
-};
+const navElements = [
+	{ displayName: "Places", link: "/", icon: "explore" },
+	{ displayName: "Profile", link: "/profile", icon: "person" },
+	{ displayName: "Cart", link: "/cart", icon: "shopping_cart" },
+];
 
-interface NavigationProps {
-	navElements: navElement[];
-}
-
-const Navigation = ({ navElements }: NavigationProps) => {
-	const { path } = useLocation();
+const Navigation = () => {
+	const [value, setValue] = useState("/");
+	const { route } = useLocation();
 
 	return (
-		<nav className={styles.navContainer}>
-			<ul className={styles.navList}>
-				{navElements.map(({ displayName, link, icon }) => {
-					const isActive = path === link;
-					return (
-						<li className={styles.navElement} key={link}>
-							<a style={{ color: isActive ? "var(--primary)" : "" }} href={link}>
-								{icon && <span className="material-symbols-outlined">{icon}</span>}
-								<span className={styles.navText}>{displayName}</span>
-							</a>
-						</li>
-					);
-				})}
-			</ul>
-		</nav>
+		<BottomNavigation
+			value={value}
+			onChange={(event, newValue) => {
+				setValue(newValue);
+			}}
+			sx={{ order: 2 }}
+		>
+			{navElements.map(({ displayName, link, icon }) => (
+				<BottomNavigationAction
+					key={displayName}
+					label={displayName}
+					value={link}
+					icon={<span className="material-symbols-outlined">{icon}</span>}
+					onClick={() => route(link)}
+				/>
+			))}
+		</BottomNavigation>
 	);
 };
 
