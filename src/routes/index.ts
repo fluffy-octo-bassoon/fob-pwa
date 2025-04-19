@@ -1,5 +1,5 @@
-import CartPage from "./cart/cart";
-import PlacesPage from "./places/places";
-import ProfilePage from "./profile/profile";
+import CartPage from "./cart";
+import HomePage from "./home";
+import ProfilePage from "./profile";
 
-export { CartPage, PlacesPage, ProfilePage };
+export { CartPage, HomePage, ProfilePage };

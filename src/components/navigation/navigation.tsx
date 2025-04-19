@@ -13,23 +13,25 @@ const Navigation = () => {
 	const { route } = useLocation();
 
 	return (
-		<BottomNavigation
-			value={value}
-			onChange={(event, newValue) => {
-				setValue(newValue);
-			}}
-			sx={{ order: 2 }}
-		>
-			{navElements.map(({ displayName, link, icon }) => (
-				<BottomNavigationAction
-					key={displayName}
-					label={displayName}
-					value={link}
-					icon={<span className="material-symbols-outlined">{icon}</span>}
-					onClick={() => route(link)}
-				/>
-			))}
-		</BottomNavigation>
+		<>
+			<BottomNavigation
+				value={value}
+				onChange={(event, newValue) => {
+					setValue(newValue);
+				}}
+				sx={{ order: 2 }}
+			>
+				{navElements.map(({ displayName, link, icon }) => (
+					<BottomNavigationAction
+						key={displayName}
+						label={displayName}
+						value={link}
+						icon={<span className="material-symbols-outlined">{icon}</span>}
+						onClick={() => route(link)}
+					/>
+				))}
+			</BottomNavigation>
+		</>
 	);
 };
 

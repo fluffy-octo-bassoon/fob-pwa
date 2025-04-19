@@ -9,7 +9,6 @@ body {
 }
 
 #app {
-	position: relative;
 	display: flex;
 	flex-direction: column;
 	height: min(100dvh, 100vh);
@@ -17,19 +16,15 @@ body {
 }
 
 .content {
-	height: 100%;
-	width: 100%;
+	align-items: center;
+	display: flex;
+	flex: 1;
+	justify-content: center;
 	order: 1;
 }
 
 .material-symbols-outlined {
 	font-variation-settings: "FILL" 1;
-}
-
-@media (max-width: 768px) {
-	body {
-		font-size: 14px;
-	}
 }
 
 /* @media (prefers-reduced-motion: reduce) {
