@@ -16,7 +16,7 @@ const Navigation = () => {
 		<>
 			<BottomNavigation
 				value={value}
-				onChange={(event, newValue) => {
+				onChange={(_event, newValue) => {
 					setValue(newValue);
 				}}
 				sx={{ order: 2 }}

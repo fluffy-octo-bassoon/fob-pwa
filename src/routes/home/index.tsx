@@ -1,5 +1,6 @@
 import { CircularProgress } from "@mui/material";
 import { useEffect, useState } from "preact/hooks";
+import Cards from "./components/cards/cards";
 
 function HomePage() {
 	let timer: NodeJS.Timeout;
@@ -8,7 +9,7 @@ function HomePage() {
 	useEffect(() => {
 		timer = setTimeout(() => {
 			setIsLoading(false);
-		}, 5000);
+		}, 200);
 
 		return () => timer;
 	});
@@ -17,7 +18,7 @@ function HomePage() {
 
 	return (
 		<>
-			<h3>Please start searching...</h3>
+			<Cards />
 		</>
 	);
 }

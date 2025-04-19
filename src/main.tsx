@@ -6,6 +6,7 @@ import { ErrorBoundary, LocationProvider, Route, Router } from "preact-iso";
 import { Navigation } from "./components";
 import theme from "./constants/theme";
 import { CartPage, HomePage, ProfilePage } from "./routes";
+import Header from "./components/header/header";
 
 const Routes = () => (
 	<ErrorBoundary>
@@ -19,6 +20,7 @@ const Routes = () => (
 
 const Layout = () => (
 	<>
+		<Header />
 		<main className="content">
 			<Routes />
 		</main>
