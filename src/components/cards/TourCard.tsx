@@ -11,14 +11,14 @@ interface CardProps {
 
 const TourCard = ({ cover, price, provider, rating, tags, title }: CardProps) => {
 	return (
-		<Card sx={{ width: "100%" }}>
-			<CardContent sx={{ display: "flex", flexDirection: "row" }}>
+		<Card>
+			<CardContent sx={{ display: "flex", flexDirection: "row"}}>
 				<Stack spacing={0.5} sx={{ display: "flex", alignItems: "center" }}>
 					<img loading="lazy" alt="img" src={cover} width={"150px"} height={"150px"} />
 					<Rating value={rating} precision={0.5} readOnly />
 				</Stack>
-				<Stack padding={2} flex={1}>
-					<Typography variant="h5" textOverflow={"ellipsis"}>
+				<Stack padding={2} flex={1} overflow={"hidden"} textOverflow={"ellipsis"} maxHeight={"10%"}>
+					<Typography variant="h5">
 						{title}
 					</Typography>
 					<Typography variant="subtitle1">
@@ -27,7 +27,7 @@ const TourCard = ({ cover, price, provider, rating, tags, title }: CardProps) =>
 					{tags && (
 						<Stack direction="row" spacing={1} paddingTop={2}>
 							{tags.map((tag) => (
-								<Chip key={tag} label={tag} color="secondary" variant="outlined" />
+								<Chip key={tag} label={tag} color="primary" variant="outlined" />
 							))}
 						</Stack>
 					)}

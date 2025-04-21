@@ -7,7 +7,7 @@ function HomePage() {
 	// if (isLoading) return <CircularProgress size={75} />;
 
 	return (
-		<Stack flex={1} gap={3}>
+		<Stack flex={1} gap={3} alignItems={"center"}>
 			{Trips.map((card) => (
 				<Link key={card.title} href="/1" sx={{ textDecoration: "none" }}>
 					<TourCard {...card} />

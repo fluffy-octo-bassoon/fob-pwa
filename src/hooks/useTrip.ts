@@ -18,6 +18,14 @@ const trips = signal<Card[]>([
 		tags: ["Prague", "Dining"],
 		title: "Prague: 3-Hour Walking Tour Around The City",
 	},
+	{
+		cover: "https://welovetravel.in/wp-content/uploads/2024/05/Lady-of-our-Church-best-photo-spots-in-Prague-769x1024.jpg",
+		price: 15.5,
+		provider: "John Travel Inc.",
+		rating: 3.5,
+		tags: ["Prague", "Dining"],
+		title: "Prague: 3-Hour Walking Tour Around The City ",
+	}
 ]);
 
 type Card = {

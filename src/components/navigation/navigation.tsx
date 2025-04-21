@@ -19,7 +19,7 @@ const Navigation = () => {
 				onChange={(_event, newValue) => {
 					setValue(newValue);
 				}}
-				sx={{ order: 2 }}
+				sx={{ order: 2}}
 			>
 				{navElements.map(({ displayName, link, icon }) => (
 					<BottomNavigationAction
