@@ -21,7 +21,8 @@
 		"@supabase/supabase-js": "^2.49.4",
 		"preact": "^10.26.2",
 		"preact-iso": "^2.9.1",
-		"preact-virtual-list": "^0.3.1"
+		"preact-virtual-list": "^0.3.1",
+		"swr": "^2.3.3"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
