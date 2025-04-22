@@ -21,6 +21,8 @@ body {
 	flex: 1;
 	justify-content: center;
 	order: 1;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .material-symbols-outlined {

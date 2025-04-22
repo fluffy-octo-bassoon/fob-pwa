@@ -10,6 +10,7 @@ const Gallery = ({ images_url }: GalleryProps) => {
 	const handleClose = () => {
 		setOpen(false);
 	};
+
 	const handleOpen = () => {
 		setOpen(true);
 	};
@@ -17,22 +18,22 @@ const Gallery = ({ images_url }: GalleryProps) => {
 	return (
 		<Accordion>
 			<AccordionSummary expandIcon={<span className="material-symbols-outlined">arrow_drop_down</span>}>
-				<img loading="lazy" alt="img" src={images_url[0]} />
+				<img loading="lazy" alt="img" src={images_url[0]} width={"100%"}/>
 			</AccordionSummary>
 			<AccordionDetails>
 				<ImageList variant="masonry" cols={2} gap={8}>
 					<Backdrop sx={(theme) => ({ color: "#fff", zIndex: theme.zIndex.drawer + 1 })} open={open} onClick={handleClose}>
-						<img src={images_url[0]} alt="cover" />
+						<img src={images_url[0]} height={"10px"} alt="cover" />
 					</Backdrop>
 					{images_url.slice(1).map((image) => {
 						return (
 							<ImageListItem key={image}>
 								<img
 									srcSet={`${image}?w=248&fit=crop&auto=format&dpr=2 2x`}
-									src={`${image}?w=248&fit=crop&auto=format`}
+									src={`${image}`}
 									alt="gallery item"
 									loading="lazy"
-									onClick={handleOpen}
+									onClick={() => {handleOpen}} onKeyDown={handleOpen}
 								/>
 							</ImageListItem>
 						);

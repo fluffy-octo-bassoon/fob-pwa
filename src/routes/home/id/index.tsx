@@ -19,7 +19,7 @@ function PlaceDetailsPage() {
 	if (!data) return <CircularProgress size={75} />;
 	if (error) return <h1>{error}</h1>;
 
-	const images_url = [data.cover_url, ...data.images_url];
+	const images_url: string[] = [data.cover_url, ...(data.images_url ?? [])].filter((url): url is string => url !== null);
 
 	return (
 		<Stack flex={1} alignItems={"center"} spacing={2} padding={2} overflow={"hidden"} textOverflow={"ellipsis"} maxWidth={"90%"}>
