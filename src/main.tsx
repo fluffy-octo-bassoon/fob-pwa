@@ -1,7 +1,7 @@
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { render } from "preact";
 import { ErrorBoundary, LocationProvider, Route, Router, lazy } from "preact-iso";
-import Navigation from "./components/navigation/navigation";
+import Navigation from "./components/navigation";
 import theme from "./constants/theme";
 import "./index.css";
 import CartPage from "./routes/cart";
@@ -9,13 +9,13 @@ import HomePage from "./routes/home";
 import ProfilePage from "./routes/profile";
 
 const PlaceDetailsPage = lazy(() => import("./routes/home/id"));
-const PlaceAddPage = lazy(() => import("./routes/home/add"));
+// const PlaceAddPage = lazy(() => import("./routes/home/add"));
 
 const Routes = () => (
 	<ErrorBoundary>
 		<Router>
 			<Route path="/" component={HomePage} />
-			<Route path="/trips/add" component={PlaceAddPage} />
+			{/* <Route path="/trips/add" component={PlaceAddPage} /> */}
 			<Route path="/trips/:id" component={PlaceDetailsPage} />
 			<Route path="/profile" component={ProfilePage} />
 			<Route path="/cart" component={CartPage} />

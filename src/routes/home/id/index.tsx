@@ -1,8 +1,9 @@
 import { CircularProgress, Rating, Stack, Typography } from "@mui/material";
 import { useRoute } from "preact-iso";
 import useSWR from "swr";
-import Gallery from "../../../components/gallery/gallery";
+import Gallery from "../../../components/gallery";
 import supabase from "../../../constants/supabase";
+import { UserSignal } from "../../../hooks/auth";
 import type { Tables } from "../../../types/database.types";
 
 const fetcher = async (url: string): Promise<Tables<"trips">> => {
@@ -11,7 +12,7 @@ const fetcher = async (url: string): Promise<Tables<"trips">> => {
 	return data as Tables<"trips">;
 };
 
-function PlaceDetailsPage() {
+export default function PlaceDetailsPage() {
 	const { params } = useRoute();
 
 	const { data, error } = useSWR<Tables<"trips">>(`trips?id=eq.${params.id}`, fetcher);
@@ -19,7 +20,9 @@ function PlaceDetailsPage() {
 	if (!data) return <CircularProgress size={75} />;
 	if (error) return <h1>{error}</h1>;
 
-	const images_url: string[] = [data.cover_url, ...(data.images_url ?? [])].filter((url): url is string => url !== null);
+	if (UserSignal.value?.id === data.user_id) console.log("Matches, user is the owner!");
+
+	const images_url: string[] = [data.cover_url, ...(data.images_url ?? [])].filter((url) => url !== null);
 
 	return (
 		<Stack flex={1} alignItems={"center"} spacing={2} overflow={"hidden"} textOverflow={"ellipsis"}>
@@ -38,5 +41,3 @@ function PlaceDetailsPage() {
 		</Stack>
 	);
 }
-
-export default PlaceDetailsPage;

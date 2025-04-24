@@ -2,7 +2,7 @@ import { CircularProgress, Stack } from "@mui/material";
 import { signal } from "@preact/signals";
 import { useEffect } from "preact/hooks";
 import useSWR from "swr";
-import TourCard from "../../components/cards/TourCard";
+import TourCard from "../../components/tourCard";
 import supabase from "../../constants/supabase";
 import type { Tables } from "../../types/database.types";
 
@@ -31,7 +31,7 @@ export default function HomePage() {
 	if (error) return <h1>{error}</h1>;
 
 	return (
-		<Stack flex={1} gap={3} alignItems={"center"} sx={{ maxHeight: "100vh", overflow: 'auto' }}>
+		<Stack flex={1} gap={3} alignItems={"center"} sx={{ maxHeight: "100vh", overflow: "auto" }}>
 			{data ? (
 				trips.map((card) => (
 					<a key={card.name} href={`/trips/${card.id}`} style={{ textDecoration: "none" }}>
