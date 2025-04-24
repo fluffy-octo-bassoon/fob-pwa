@@ -16,7 +16,7 @@ body {
 }
 
 .content {
-	align-items: center;
+	padding: 1em;
 	display: flex;
 	flex: 1;
 	justify-content: center;

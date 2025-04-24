@@ -22,9 +22,9 @@ function PlaceDetailsPage() {
 	const images_url: string[] = [data.cover_url, ...(data.images_url ?? [])].filter((url): url is string => url !== null);
 
 	return (
-		<Stack flex={1} alignItems={"center"} spacing={2} padding={2} overflow={"hidden"} textOverflow={"ellipsis"} maxWidth={"90%"}>
+		<Stack flex={1} alignItems={"center"} spacing={2} overflow={"hidden"} textOverflow={"ellipsis"}>
 			<Gallery images_url={images_url} />
-			<Typography variant="h4" fontSize={30} noWrap maxWidth={"100%"}>
+			<Typography variant="h5" maxWidth={"100%"}>
 				{data.name} + more text to see how it looks
 			</Typography>
 			<Stack direction={"row"} spacing={1}>

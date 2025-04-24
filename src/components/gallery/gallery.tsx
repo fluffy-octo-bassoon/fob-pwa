@@ -1,4 +1,4 @@
-import { Accordion, AccordionDetails, AccordionSummary, Backdrop, ImageList, ImageListItem } from "@mui/material";
+import { Box, IconButton } from "@mui/material";
 import { useState } from "preact/compat";
 
 interface GalleryProps {
@@ -6,41 +6,35 @@ interface GalleryProps {
 }
 
 const Gallery = ({ images_url }: GalleryProps) => {
-	const [open, setOpen] = useState(false);
-	const handleClose = () => {
-		setOpen(false);
-	};
+	const [ currentImage, setCurrentImage ] = useState(0)
 
-	const handleOpen = () => {
-		setOpen(true);
-	};
+	const handleForward = () => {
+		setCurrentImage(currentImage + 1)
+		if(images_url.length - 2 < currentImage)
+			setCurrentImage(0)
+	}
+
+	const handleBack = () => {
+		setCurrentImage(currentImage - 1)
+		if(currentImage < 0)
+			setCurrentImage(images_url.length - 2)
+	}
 
 	return (
-		<Accordion>
-			<AccordionSummary expandIcon={<span className="material-symbols-outlined">arrow_drop_down</span>}>
-				<img loading="lazy" alt="img" src={images_url[0]} width={"100%"}/>
-			</AccordionSummary>
-			<AccordionDetails>
-				<ImageList variant="masonry" cols={2} gap={8}>
-					<Backdrop sx={(theme) => ({ color: "#fff", zIndex: theme.zIndex.drawer + 1 })} open={open} onClick={handleClose}>
-						<img src={images_url[0]} height={"10px"} alt="cover" />
-					</Backdrop>
-					{images_url.slice(1).map((image) => {
-						return (
-							<ImageListItem key={image}>
-								<img
-									srcSet={`${image}?w=248&fit=crop&auto=format&dpr=2 2x`}
-									src={`${image}`}
-									alt="gallery item"
-									loading="lazy"
-									onClick={() => {handleOpen}} onKeyDown={handleOpen}
-								/>
-							</ImageListItem>
-						);
-					})}
-				</ImageList>
-			</AccordionDetails>
-		</Accordion>
+		<Box sx={{
+			padding: .5,
+			display: "flex",
+			alignItems: "center",
+			justifyContent: "space-between",
+			backgroundImage: `url(${images_url[currentImage]})`,
+			backgroundSize: "cover",
+			borderRadius: "10px",
+			width: "100%",
+			height: 200
+		}}>
+			<IconButton onClick={handleBack}><span className="material-symbols-outlined">arrow_back_ios</span></IconButton>
+			<IconButton onClick={handleForward}><span className="material-symbols-outlined">arrow_forward_ios</span></IconButton>
+		</Box>
 	);
 };
 
