@@ -13,6 +13,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Make gradlew executable
+        run: chmod +x ./android/gradlew
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -50,13 +53,10 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '17'
+          java-version: '21'
 
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
-
-      - name: Make gradlew executable
-        run: chmod +x ./android/gradlew
 
       - name: Build APK and AAB
         working-directory: ./android
