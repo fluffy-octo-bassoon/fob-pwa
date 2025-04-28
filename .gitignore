@@ -1,0 +1,51 @@
+# Logs
+logs/
+*.log
+pnpm-debug.log*
+
+# Dependency directories
+node_modules/
+
+# Build output
+dist/
+dist-ssr/
+# Vite cache
+.vite/
+
+# Local environment variables
+*.local
+.env.local
+.env.*.local
+
+# Editor directories and files
+.idea/
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Android specific ignores
+/android/.gradle/
+/android/build/
+/android/app/build/
+/android/captures/
+/android/app/.externalNativeBuild/
+/android/app/GeneratedAppIndexingNativeBase.java
+/android/app/google-services.json # Keep this if you want to track it, ignore otherwise
+/android/key.store
+/android/key.properties
+/android/local.properties
+/android/.idea/
+/android/*.iml
+
+# iOS specific ignores
+/ios/build/
+/ios/DerivedData/
+/ios/Pods/
+/ios/.swiftpm/
+/ios/.vscode/
+/ios/*.xcodeproj/project.xcworkspace/
+/ios/*.xcworkspace/xcuserdata/
+/ios/*.xcodeproj/xcuserdata/

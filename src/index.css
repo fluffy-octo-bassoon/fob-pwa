@@ -1,0 +1,39 @@
+:root {
+	font-family: system-ui, Inter, Avenir, Helvetica, Arial, sans-serif;
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+}
+
+body {
+	padding: env(safe-area-inset-top, 20px) env(safe-area-inset-right, 20px) env(safe-area-inset-bottom, 20px) env(safe-area-inset-left, 20px);
+}
+
+#app {
+	display: flex;
+	flex-direction: column;
+	height: min(100dvh, 100vh);
+	width: min(100dvw, 100vw);
+}
+
+.content {
+	padding: 1em;
+	display: flex;
+	flex: 1;
+	justify-content: center;
+	order: 1;
+	overflow: scroll;
+	text-overflow: ellipsis;
+}
+
+.material-symbols-outlined {
+	font-variation-settings: "FILL" 1;
+}
+
+/* @media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    scroll-behavior: auto !important;
+    transform: none !important;
+    transition: none !important;
+  }
+} */
