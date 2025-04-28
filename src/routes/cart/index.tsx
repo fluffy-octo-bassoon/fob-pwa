@@ -4,7 +4,7 @@ import { UserSignal } from "../../hooks/auth";
 function CartPage() {
 	const { route } = useLocation();
 
-	if (UserSignal.value != null) route("/", true);
+	if (UserSignal.value === null) route("/login", true);
 
 	return (
 		<div>

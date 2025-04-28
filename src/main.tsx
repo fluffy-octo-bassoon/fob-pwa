@@ -7,6 +7,8 @@ import "./index.css";
 import CartPage from "./routes/cart";
 import HomePage from "./routes/home";
 import ProfilePage from "./routes/profile";
+import Header from "./components/header";
+import LoginPage from "./routes/login";
 
 const PlaceDetailsPage = lazy(() => import("./routes/home/id"));
 // const PlaceAddPage = lazy(() => import("./routes/home/add"));
@@ -19,12 +21,14 @@ const Routes = () => (
 			<Route path="/trips/:id" component={PlaceDetailsPage} />
 			<Route path="/profile" component={ProfilePage} />
 			<Route path="/cart" component={CartPage} />
+			<Route path="/login" component={LoginPage} />
 		</Router>
 	</ErrorBoundary>
 );
 
 const Layout = () => (
 	<>
+		<Header />
 		<main className="content">
 			<Routes />
 		</main>

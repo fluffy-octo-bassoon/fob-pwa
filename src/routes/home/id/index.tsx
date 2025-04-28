@@ -25,7 +25,7 @@ export default function PlaceDetailsPage() {
 	const images_url: string[] = [data.cover_url, ...(data.images_url ?? [])].filter((url) => url !== null);
 
 	return (
-		<Stack flex={1} alignItems={"center"} spacing={2} overflow={"hidden"} textOverflow={"ellipsis"}>
+		<Stack flex={1} alignItems={"center"} spacing={2}>
 			<Gallery images_url={images_url} />
 			<Typography variant="h5" maxWidth={"100%"}>
 				{data.name} + more text to see how it looks
@@ -34,6 +34,10 @@ export default function PlaceDetailsPage() {
 				<Rating value={data.rating} precision={0.5} readOnly size="large" />
 				<Typography variant="h6">{data.rating}</Typography>
 			</Stack>
+			<Typography variant="body1">
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, expedita ex? Adipisci explicabo optio omnis iusto, quis dolor
+				doloribus laboriosam. Quos quas dolorum in a necessitatibus dolores officia facere nam.
+			</Typography>
 			<Typography variant="body1">
 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, expedita ex? Adipisci explicabo optio omnis iusto, quis dolor
 				doloribus laboriosam. Quos quas dolorum in a necessitatibus dolores officia facere nam.

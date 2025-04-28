@@ -21,7 +21,7 @@ body {
 	flex: 1;
 	justify-content: center;
 	order: 1;
-	overflow: hidden;
+	overflow: scroll;
 	text-overflow: ellipsis;
 }
 
