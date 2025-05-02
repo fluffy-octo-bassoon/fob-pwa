@@ -23,6 +23,7 @@
 		"preact-iso": "^2.9.1",
 		"preact-virtual-list": "^0.3.1",
 		"react-material-ui-carousel": "^3.4.2",
+		"react-swipeable": "^7.0.2",
 		"swr": "^2.3.3"
 	},
 	"devDependencies": {
