@@ -1,12 +1,11 @@
+import { Button } from "@mui/material";
 import { useLocation } from "preact-iso";
-import { UserSignal } from "../../hooks/auth";
+import { signOut } from "../hooks/auth";
 
 function ProfilePage() {
 	const { route } = useLocation();
 
-	if (UserSignal.value === null) route("/login", true);
-
-	return <h1>Profile</h1>;
+	return <Button onClick={signOut}>chuj</Button>;
 }
 
 export default ProfilePage;

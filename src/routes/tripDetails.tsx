@@ -1,26 +1,9 @@
-import { CircularProgress, Rating, Stack, Typography } from "@mui/material";
+import { Rating, Stack, Typography } from "@mui/material";
 import { useRoute } from "preact-iso";
-import useSWR from "swr";
-import Gallery from "../../../components/gallery";
-import supabase from "../../../constants/supabase";
-import { UserSignal } from "../../../hooks/auth";
-import type { Tables } from "../../../types/database.types";
-
-const fetcher = async (url: string): Promise<Tables<"trips">> => {
-	const { data, error } = await supabase.from(url).select("*").single();
-	if (error) throw new Error(error.message);
-	return data as Tables<"trips">;
-};
+import Gallery from "../components/gallery";
 
 export default function PlaceDetailsPage() {
 	const { params } = useRoute();
-
-	const { data, error } = useSWR<Tables<"trips">>(`trips?id=eq.${params.id}`, fetcher);
-
-	if (!data) return <CircularProgress size={75} />;
-	if (error) return <h1>{error}</h1>;
-
-	if (UserSignal.value?.id === data.user_id) console.log("Matches, user is the owner!");
 
 	const images_url: string[] = [data.cover_url, ...(data.images_url ?? [])].filter((url) => url !== null);
 
