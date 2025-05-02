@@ -1,81 +1,56 @@
 import { Button, Stack, TextField, Typography } from "@mui/material";
 import { useState } from "preact/hooks";
 import Gallery from "../../../components/gallery";
-// import { useState } from "preact/hooks";
-// import { tripsSignal } from "..";
-
-// type NewTrip = {
-// 	name: string;
-// 	provider: string;
-// 	cover_url: string;
-// };
-
-// function addTrip(trip: NewTrip) {
-// 	tripsSignal.value = [
-// 		...tripsSignal.value,
-// 		{
-// 			...trip,
-// 			id: crypto.randomUUID(),
-// 			active: null,
-// 			city: null,
-// 			created_at: null,
-// 			images_url: null,
-// 			is_featured: null,
-// 			price: 150,
-// 			rating: 0,
-// 			tags: ["test", "test2"],
-// 			updated_at: null,
-// 			user_id: null,
-// 		},
-// 	];
-// 	console.log(tripsSignal.value);
-// }
+import supabase from "../../../constants/supabase";
 
 export default function PlaceAddPage() {
+	const [name, setName] = useState("");
+	const [price, setPrice] = useState("");
 	const [image, setImage] = useState("");
 	const [images, setImages] = useState<string[]>([]);
 
-	const handleChange = (event) => {
-		setImage(event.target.value);
-	};
-	// const [formData, setFormData] = useState<NewTrip>({
-	// 	name: "",
-	// 	provider: "",
-	// 	cover_url: "",
-	// });
+	const handleAddTrip = async () => {
+		const { error } = await supabase.from("trips").insert([
+			{
+				name,
+				price: Number(price),
+				images_urls: images,
+			},
+		]);
 
-	// const handleChange = (key: keyof NewTrip) => (e: Event) => {
-	// 	const target = e.target as HTMLInputElement;
-	// 	setFormData((prev) => ({ ...prev, [key]: target.value }));
-	// };
+		if (error) {
+			console.error("Insert error:", error);
+		} else {
+			alert("Trip added successfully!");
+		}
+	};
 
 	return (
-		// <Stack flex={1} alignItems="center" spacing={2} padding={2} maxWidth="90%">
-		// 	<Input placeholder="Name" value={formData.name} onChange={handleChange("name")} />
-		// 	<Input placeholder="Provider" value={formData.provider} onChange={handleChange("provider")} />
-		// 	<Input placeholder="Cover URL" value={formData.cover_url} onChange={handleChange("cover_url")} />
-		// 	<Button onClick={() => addTrip(formData)}>Add Trip</Button>
-		// </Stack>
 		<Stack spacing={1}>
 			<Typography variant="h6" textAlign={"center"}>
 				Dodaj Wycieczkę
 			</Typography>
-			<TextField required label="Nazwa" variant="outlined" />
+			<TextField required label="Nazwa" variant="outlined" value={name} onChange={(e) => setName(e.target.value)} />
 			<TextField label="Opis" variant="outlined" />
-			<TextField label="Cena" variant="outlined" />
+			<TextField label="Cena" variant="outlined" value={price} onChange={(e) => setPrice(e.target.value)} />
 			<TextField label="Punkt Spotkania (Google Maps Link)" variant="outlined" />
 			<Stack direction={"row"} spacing={1}>
-				<TextField label="Zdjęcia" variant="outlined" onChange={handleChange} />
+				<TextField label="Zdjęcia" variant="outlined" value={image} onChange={(e) => setImage(e.target.value)} />
 				<Button
 					variant="outlined"
 					onClick={() => {
-						setImages([...images, image]);
+						if (image) {
+							setImages([...images, image]);
+							setImage("");
+						}
 					}}
 				>
 					Dodaj
 				</Button>
 			</Stack>
-			<Button variant="contained">Dodaj Wycieczkę</Button>
+			<Button variant="contained" onClick={handleAddTrip}>
+				Dodaj Wycieczkę
+			</Button>
 			{images.length > 0 && (
 				<Stack>
 					<Typography variant="h6" textAlign={"center"}>
