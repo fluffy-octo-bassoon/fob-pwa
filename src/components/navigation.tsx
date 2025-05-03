@@ -4,10 +4,12 @@ import { useState } from "preact/hooks";
 
 const navElements = [
 	{ displayName: "Places", link: "/", icon: "explore" },
-	// { displayName: "Add", link: "/trips/add", icon: "add_box" },
 	{ displayName: "Profile", link: "/profile", icon: "person" },
 	{ displayName: "Cart", link: "/cart", icon: "shopping_cart" },
 ];
+
+// if (isAdmin || isProvider)
+// 	navElements = [...navElements, { displayName: "Add", link: "/trips/add", icon: "add_box" }];
 
 const Navigation = () => {
 	const [value, setValue] = useState("/");

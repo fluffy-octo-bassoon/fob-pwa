@@ -1,19 +1,25 @@
 import { Box, Card, CardContent, CardMedia, Link, Rating, Stack, Typography } from "@mui/material";
-import type { Tables } from "../types/database.types";
 
-const TourCard = ({ cover_url, price, provider, rating, name }: Tables<"trips">) => {
+const TourCard = ({ coverUrl, price, provider, rating, name }) => {
 	return (
 		<Card sx={{ width: "90vw", display: "flex", height: "21vh" }}>
-			<Stack spacing={1} sx={{ display: "flex", flexDirection: "column", alignItems: "center", width: "50%", padding: "10px" }}>
+			<Stack
+				spacing={1}
+				sx={{ display: "flex", flexDirection: "column", alignItems: "center", width: "50%", padding: "10px" }}
+			>
 				<CardMedia
 					component={"img"}
 					sx={{ width: "100px", height: "100px", objectFit: "cover", borderRadius: "5px" }}
-					image={String(cover_url)}
-					alt={String(cover_url)}
+					image={String(coverUrl)}
+					alt={String(coverUrl)}
 				/>
 				<Rating value={rating} precision={0.5} readOnly size="small" />
 			</Stack>
-			<Box overflow={"hidden"} textOverflow={"ellipsis"} sx={{ display: "flex", flexDirection: "column", width: "100%" }}>
+			<Box
+				overflow={"hidden"}
+				textOverflow={"ellipsis"}
+				sx={{ display: "flex", flexDirection: "column", width: "100%" }}
+			>
 				<CardContent sx={{ paddingLeft: 0 }}>
 					<Typography
 						variant="body1"

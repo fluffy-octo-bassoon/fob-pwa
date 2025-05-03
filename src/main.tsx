@@ -12,6 +12,7 @@ import HomePage from "./routes/home";
 import LoginPage from "./routes/login";
 import ProfilePage from "./routes/profile";
 import ProtectedRoute from "./routes/protectedRoute";
+import PlaceDetailsPage from "./routes/tripDetails";
 
 // const PlaceAddPage = lazy(() => import("./routes/home/add"));
 
@@ -20,7 +21,7 @@ const Routes = () => (
 		<Router>
 			<Route path="/" component={HomePage} />
 			{/* <Route path="/trips/add" component={PlaceAddPage} /> */}
-			{/* <Route path="/trips/:id" component={PlaceDetailsPage} /> */}
+			<Route path="/trips/:id" component={PlaceDetailsPage} />
 			<Route path="/profile" component={ProtectedRoute} TargetComponent={ProfilePage} />
 			<Route path="/cart" component={ProtectedRoute} TargetComponent={CartPage} />
 			<Route path="/login" component={LoginPage} />
