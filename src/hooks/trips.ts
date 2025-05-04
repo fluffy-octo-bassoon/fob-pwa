@@ -1,43 +1,19 @@
-import { signal } from "@preact/signals";
+import { effect, signal } from "@preact/signals";
+import type { Models } from "appwrite";
 import { databases } from "../constants/appwrite";
 
 const DB_ID = "68138dcc00336f800504";
 const COLLECTION_ID = "68163d5c001d73f8d500";
 
-type Trip = {
-	$id: string;
-	$createdAt: string;
-	$updatedAt: string;
-	name: string;
-	description?: string;
-	meetingPoint?: string;
-	tags?: string[];
-	accepted?: boolean;
-	visible?: boolean;
-	featured?: boolean;
-	price?: number;
-	coverUrl: string;
-	imagesUrl?: string[];
-	provider: string;
-	rating: number;
-};
-
-const trips = signal<Trip[]>([]);
+const trips = signal<Models.Document[]>([]);
 
 const fetchFeaturedTrips = async () => {
-	try {
-		const { documents } = await databases.listDocuments(DB_ID, COLLECTION_ID);
-		trips.value = documents;
-	} catch (err) {
-		console.error("Failed to fetch trips:", err);
-	}
+	const { documents } = await databases.listDocuments(DB_ID, COLLECTION_ID);
+	trips.value = documents;
 };
 
-// Optional dev-only debug effect
-// effect(() => {
-// 	console.debug("Trips:", trips.value);
-// });
-
-fetchFeaturedTrips();
+effect(() => {
+	console.debug("Trips:", trips.value);
+});
 
 export { fetchFeaturedTrips, trips };

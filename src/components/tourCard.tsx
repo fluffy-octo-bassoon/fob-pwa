@@ -1,6 +1,14 @@
 import { Box, Card, CardContent, CardMedia, Link, Rating, Stack, Typography } from "@mui/material";
 
-const TourCard = ({ coverUrl, price, provider, rating, name }) => {
+interface TourCardProps {
+	coverUrl: string;
+	price: number;
+	provider: string;
+	rating: number;
+	name: string;
+}
+
+const TourCard = ({ coverUrl, price, provider, rating, name }: TourCardProps) => {
 	return (
 		<Card sx={{ width: "90vw", display: "flex", height: "21vh" }}>
 			<Stack
@@ -13,7 +21,7 @@ const TourCard = ({ coverUrl, price, provider, rating, name }) => {
 					image={String(coverUrl)}
 					alt={String(coverUrl)}
 				/>
-				<Rating value={rating} precision={0.5} readOnly size="small" />
+				<Rating value={Number(rating)} precision={0.5} readOnly size="small" />
 			</Stack>
 			<Box
 				overflow={"hidden"}

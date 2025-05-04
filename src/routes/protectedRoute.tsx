@@ -1,13 +1,29 @@
+import type { ComponentType, JSX } from "preact";
 import { useLocation } from "preact-iso";
-import { user } from "../hooks/auth";
+import { useEffect } from "preact/hooks";
+import { fetchUser, user } from "../hooks/auth";
 
-export default function ProtectedRoute({ TargetComponent, redirectPath = "/login", ...routeProps }) {
+interface ProtectedRouteProps {
+	TargetComponent: ComponentType<JSX.IntrinsicAttributes>;
+	redirectPath?: string;
+}
+
+export default function ProtectedRoute({ TargetComponent, redirectPath = "/login" }: ProtectedRouteProps) {
 	const { route } = useLocation();
 
-	if (!user.value) {
-		console.error("User not logged in!");
-		route(redirectPath);
-	}
+	// biome-ignore lint/correctness/useExhaustiveDependencies: Not a dependency
+	useEffect(() => {
+		const checkUser = async () => {
+			const user = await fetchUser();
+			if (!user) {
+				route(redirectPath);
+			}
+		};
 
-	return <TargetComponent {...routeProps} />;
+		checkUser();
+	}, []);
+
+	if (!user.value) return null;
+
+	return <TargetComponent />;
 }

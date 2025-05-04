@@ -19,14 +19,6 @@ const Gallery = ({ images_url }: GalleryProps) => {
 		onSwipedRight: () => setCurrentImage((prev) => (prev - 1 + images_url.length) % images_url.length),
 	});
 
-	const handleForward = () => {
-		setCurrentImage((prev) => (prev + 1) % images_url.length);
-	};
-
-	const handleBack = () => {
-		setCurrentImage((prev) => (prev - 1 + images_url.length) % images_url.length);
-	};
-
 	return (
 		<div {...handlers} style="width: 100%;" onClick={handleOpen}>
 			<Modal open={open} onClose={handleClose}>
@@ -42,9 +34,7 @@ const Gallery = ({ images_url }: GalleryProps) => {
 						width: "100%",
 						minHeight: 200,
 					}}
-				>
-					T
-				</Box>
+				/>
 			</Modal>
 			<Box
 				sx={{
@@ -59,10 +49,10 @@ const Gallery = ({ images_url }: GalleryProps) => {
 					minHeight: 200,
 				}}
 			>
-				<IconButton onClick={handleBack}>
+				<IconButton>
 					<span className="material-symbols-outlined">arrow_back_ios</span>
 				</IconButton>
-				<IconButton onClick={handleForward}>
+				<IconButton>
 					<span className="material-symbols-outlined">arrow_forward_ios</span>
 				</IconButton>
 			</Box>

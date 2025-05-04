@@ -1,6 +1,8 @@
 import { BottomNavigation, BottomNavigationAction } from "@mui/material";
+import { signal } from "@preact/signals";
 import { useLocation } from "preact-iso";
-import { useState } from "preact/hooks";
+
+const currentRoute = signal("/profile");
 
 const navElements = [
 	{ displayName: "Places", link: "/", icon: "explore" },
@@ -12,15 +14,14 @@ const navElements = [
 // 	navElements = [...navElements, { displayName: "Add", link: "/trips/add", icon: "add_box" }];
 
 const Navigation = () => {
-	const [value, setValue] = useState("/");
 	const { route } = useLocation();
 
 	return (
 		<>
 			<BottomNavigation
-				value={value}
+				value={currentRoute.value}
 				onChange={(_event, newValue) => {
-					setValue(newValue);
+					currentRoute.value = newValue;
 				}}
 				sx={{ order: 2 }}
 			>

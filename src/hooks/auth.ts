@@ -10,33 +10,25 @@ effect(() => {
 	console.log(user.value);
 	console.log(isAdmin.value);
 	console.log(isProvider.value);
-
-	// const refreshData = async () => {
-	// 	user.value = await account.get();
-	// 	isAdmin.value = user.value.labels.includes("admin");
-	// 	isProvider.value = user.value.labels.includes("provider");
-	// };
-
-	// refreshData();
 });
 
-const refreshData = async () => {
-	user.value = await account.get();
-	isAdmin.value = user.value.labels.includes("admin");
-	isProvider.value = user.value.labels.includes("provider");
-};
-
 const fetchUser = async () => {
-	user.value = await account.get();
-	isAdmin.value = user.value.labels.includes("admin");
-	isProvider.value = user.value.labels.includes("provider");
+	if (user.value) return user.value;
+
+	const data = await account.get();
+
+	user.value = data;
+	isAdmin.value = data.labels?.includes("admin") ?? false;
+	isProvider.value = data.labels?.includes("provider") ?? false;
+
+	return user.value;
 };
 
 const signUpWithEmailAndPassword = async (email: string, password: string, name: string) => {
 	try {
 		await account.create(ID.unique(), email, password, name);
 		await account.createEmailPasswordSession(email, password);
-		refreshData();
+		fetchUser();
 		return true;
 	} catch (err) {
 		console.error("Sign up failed:", err);
@@ -47,7 +39,7 @@ const signUpWithEmailAndPassword = async (email: string, password: string, name:
 const signInWithEmailAndPassword = async (email: string, password: string) => {
 	try {
 		await account.createEmailPasswordSession(email, password);
-		refreshData();
+		fetchUser();
 		return true;
 	} catch (err) {
 		console.error("Sign in failed:", err);
@@ -66,6 +58,12 @@ const signOut = async () => {
 	}
 };
 
-fetchUser();
-
-export { isAdmin, isProvider, signInWithEmailAndPassword, signOut, signUpWithEmailAndPassword, user };
+export {
+	fetchUser,
+	isAdmin,
+	isProvider,
+	signInWithEmailAndPassword,
+	signOut,
+	signUpWithEmailAndPassword,
+	user,
+};

@@ -45,6 +45,8 @@ const App = () => {
 			if (window.history.length > 1) window.history.back();
 			else CapacitorApp.exitApp();
 		});
+
+		// fetchFeaturedTrips();
 	}, []);
 
 	return (
