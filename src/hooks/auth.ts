@@ -7,28 +7,19 @@ const isAdmin = signal<boolean>(false);
 const isProvider = signal<boolean>(false);
 
 effect(() => {
+	isAdmin.value = user.value?.labels.includes("admin") ?? false;
+	isProvider.value = user.value?.labels.includes("provider") ?? false;
+
 	console.log(user.value);
 	console.log(isAdmin.value);
 	console.log(isProvider.value);
 });
 
-const fetchUser = async () => {
-	if (user.value) return user.value;
-
-	const data = await account.get();
-
-	user.value = data;
-	isAdmin.value = data.labels?.includes("admin") ?? false;
-	isProvider.value = data.labels?.includes("provider") ?? false;
-
-	return user.value;
-};
-
 const signUpWithEmailAndPassword = async (email: string, password: string, name: string) => {
 	try {
 		await account.create(ID.unique(), email, password, name);
 		await account.createEmailPasswordSession(email, password);
-		fetchUser();
+		await fetchUser();
 		return true;
 	} catch (err) {
 		console.error("Sign up failed:", err);
@@ -36,10 +27,16 @@ const signUpWithEmailAndPassword = async (email: string, password: string, name:
 	}
 };
 
+const fetchUser = async () => {
+	if (!user.value) user.value = await account.get();
+
+	return user.value;
+};
+
 const signInWithEmailAndPassword = async (email: string, password: string) => {
 	try {
 		await account.createEmailPasswordSession(email, password);
-		fetchUser();
+		await fetchUser();
 		return true;
 	} catch (err) {
 		console.error("Sign in failed:", err);

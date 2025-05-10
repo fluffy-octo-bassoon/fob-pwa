@@ -43,7 +43,7 @@ const TourCard = ({ coverUrl, price, provider, rating, name }: TourCardProps) =>
 					</Typography>
 					<Typography variant="subtitle2" noWrap>
 						Provided by:
-						<Link>{provider} Test</Link>
+						<Link>{provider}</Link>
 					</Typography>
 					<Typography variant="h6" textAlign={"center"} paddingTop={2} color={"primary.main"}>
 						${price} per person

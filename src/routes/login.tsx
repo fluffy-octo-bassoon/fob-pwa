@@ -1,15 +1,21 @@
 import { Button, TextField } from "@mui/material";
+import { useLocation, useRoute } from "preact-iso";
 import { useState } from "preact/hooks";
 import { signInWithEmailAndPassword } from "../hooks/auth";
 
 export default function LoginPage() {
+	const { route } = useLocation();
+	const { query } = useRoute();
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
 	const handleSubmit = async (e) => {
+		const { redirectTo } = query;
+
 		e.preventDefault();
 
 		await signInWithEmailAndPassword(email, password);
+		route(`/${redirectTo}`);
 	};
 
 	return (

@@ -1,29 +1,41 @@
 import type { ComponentType, JSX } from "preact";
 import { useLocation } from "preact-iso";
-import { useEffect } from "preact/hooks";
-import { fetchUser, user } from "../hooks/auth";
+import { useEffect, useState } from "preact/hooks";
+import { user } from "../hooks/auth";
 
 interface ProtectedRouteProps {
 	TargetComponent: ComponentType<JSX.IntrinsicAttributes>;
-	redirectPath?: string;
+	path: string;
+	requirement?: boolean;
 }
 
-export default function ProtectedRoute({ TargetComponent, redirectPath = "/login" }: ProtectedRouteProps) {
+export default function ProtectedRoute({ TargetComponent, path, requirement = true }: ProtectedRouteProps) {
 	const { route } = useLocation();
+	const [authStatus, setAuthStatus] = useState<"loading" | "authenticated" | "unauthenticated">("loading");
 
-	// biome-ignore lint/correctness/useExhaustiveDependencies: Not a dependency
 	useEffect(() => {
-		const checkUser = async () => {
-			const user = await fetchUser();
-			if (!user) {
-				route(redirectPath);
+		const checkAuth = async () => {
+			setAuthStatus("loading");
+
+			if (user.value && requirement) {
+				setAuthStatus("authenticated");
+			} else {
+				setAuthStatus("unauthenticated");
 			}
 		};
 
-		checkUser();
-	}, []);
+		checkAuth();
+	}, [user.value, requirement]);
 
-	if (!user.value) return null;
+	useEffect(() => {
+		if (authStatus === "unauthenticated") {
+			route(`/login?redirectTo=${path}`);
+		}
+	}, [authStatus, route, path]);
 
-	return <TargetComponent />;
+	if (authStatus === "authenticated") {
+		return <TargetComponent />;
+	}
+
+	return null;
 }

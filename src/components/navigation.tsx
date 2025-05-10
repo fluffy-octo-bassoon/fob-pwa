@@ -1,34 +1,36 @@
-import { BottomNavigation, BottomNavigationAction } from "@mui/material";
-import { signal } from "@preact/signals";
+import { BottomNavigation, BottomNavigationAction, Tab, Tabs } from "@mui/material";
 import { useLocation } from "preact-iso";
-
-const currentRoute = signal("/profile");
-
-const navElements = [
-	{ displayName: "Places", link: "/", icon: "explore" },
-	{ displayName: "Profile", link: "/profile", icon: "person" },
-	{ displayName: "Cart", link: "/cart", icon: "shopping_cart" },
-];
-
-// if (isAdmin || isProvider)
-// 	navElements = [...navElements, { displayName: "Add", link: "/trips/add", icon: "add_box" }];
+import { useMemo } from "preact/hooks";
+import { isAdmin, isProvider, user } from "../hooks/auth";
 
 const Navigation = () => {
-	const { route } = useLocation();
+	const { route, path } = useLocation();
+
+	const navElements = useMemo(() => {
+		let baseElements = [
+			{ label: "Places", link: "/", icon: "explore" },
+			{ label: "Profile", link: "/profile", icon: "person" },
+			{ label: "Cart", link: "/cart", icon: "shopping_cart" },
+		];
+
+		if (!user.value) {
+			baseElements = [...baseElements, { label: "Login", link: "/login", icon: "login" }];
+		}
+
+		if (isAdmin.value || isProvider.value) {
+			baseElements = [...baseElements, { label: "Add", link: "/manage/add", icon: "add_box" }];
+		}
+
+		return baseElements;
+	}, [user.value, isAdmin.value, isProvider.value]);
 
 	return (
 		<>
-			<BottomNavigation
-				value={currentRoute.value}
-				onChange={(_event, newValue) => {
-					currentRoute.value = newValue;
-				}}
-				sx={{ order: 2 }}
-			>
-				{navElements.map(({ displayName, link, icon }) => (
+			<BottomNavigation value={path} sx={{ order: 2 }}>
+				{navElements.map(({ label, link, icon }) => (
 					<BottomNavigationAction
-						key={displayName}
-						label={displayName}
+						key={label}
+						label={label}
 						value={link}
 						icon={<span className="material-symbols-outlined">{icon}</span>}
 						onClick={() => route(link)}
@@ -39,4 +41,20 @@ const Navigation = () => {
 	);
 };
 
-export default Navigation;
+const AdminNavigation = () => {
+	const navElements = [{ label: "Add", link: "/manage/add", icon: "explore" }];
+
+	if (isAdmin.value) navElements.push({ label: "Providers", link: "/manage/providers", icon: "explore" });
+
+	if (isProvider.value) navElements.push({ label: "Team", link: "/manage/teams", icon: "explore" });
+
+	return (
+		<Tabs>
+			<Tab label="1" />
+			<Tab label="2" />
+			<Tab label="3" />
+		</Tabs>
+	);
+};
+
+export { AdminNavigation, Navigation };
