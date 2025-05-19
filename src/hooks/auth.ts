@@ -55,6 +55,8 @@ const signOut = async () => {
 	}
 };
 
+fetchUser();
+
 export {
 	fetchUser,
 	isAdmin,

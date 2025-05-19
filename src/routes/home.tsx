@@ -4,7 +4,7 @@ import { trips } from "../hooks/trips";
 
 export default function HomePage() {
 	return (
-		<Stack flex={1} gap={3} alignItems="center" sx={{ maxHeight: "100vh", overflow: "auto" }}>
+		<Stack flex={1} gap={3} padding={3}>
 			{trips.value.length > 0 ? (
 				trips.value.map((card) => (
 					<a key={card.$id} href={`/trips/${card.$id}`} style={{ textDecoration: "none" }}>

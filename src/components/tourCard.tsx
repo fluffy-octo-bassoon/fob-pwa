@@ -18,7 +18,7 @@ const TourCard = ({ coverUrl, price, provider, rating, name }: TourCardProps) =>
 				<CardMedia
 					component={"img"}
 					sx={{ width: "100px", height: "100px", objectFit: "cover", borderRadius: "5px" }}
-					image={String(coverUrl)}
+					image={coverUrl}
 					alt={String(coverUrl)}
 				/>
 				<Rating value={Number(rating)} precision={0.5} readOnly size="small" />

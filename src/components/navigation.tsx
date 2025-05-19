@@ -1,4 +1,4 @@
-import { BottomNavigation, BottomNavigationAction, Tab, Tabs } from "@mui/material";
+import { BottomNavigation, BottomNavigationAction } from "@mui/material";
 import { useLocation } from "preact-iso";
 import { useMemo } from "preact/hooks";
 import { isAdmin, isProvider, user } from "../hooks/auth";
@@ -41,20 +41,4 @@ const Navigation = () => {
 	);
 };
 
-const AdminNavigation = () => {
-	const navElements = [{ label: "Add", link: "/manage/add", icon: "explore" }];
-
-	if (isAdmin.value) navElements.push({ label: "Providers", link: "/manage/providers", icon: "explore" });
-
-	if (isProvider.value) navElements.push({ label: "Team", link: "/manage/teams", icon: "explore" });
-
-	return (
-		<Tabs>
-			<Tab label="1" />
-			<Tab label="2" />
-			<Tab label="3" />
-		</Tabs>
-	);
-};
-
-export { AdminNavigation, Navigation };
+export { Navigation };

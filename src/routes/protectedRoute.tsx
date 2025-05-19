@@ -15,9 +15,7 @@ export default function ProtectedRoute({ TargetComponent, path, requirement = tr
 
 	useEffect(() => {
 		const checkAuth = async () => {
-			setAuthStatus("loading");
-
-			if (user.value && requirement) {
+			if (user.value != null && requirement) {
 				setAuthStatus("authenticated");
 			} else {
 				setAuthStatus("unauthenticated");

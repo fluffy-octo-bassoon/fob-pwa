@@ -5,7 +5,8 @@
 }
 
 body {
-	padding: env(safe-area-inset-top, 20px) env(safe-area-inset-right, 20px) env(safe-area-inset-bottom, 20px) env(safe-area-inset-left, 20px);
+	padding: env(safe-area-inset-top, 20px) env(safe-area-inset-right, 20px) env(safe-area-inset-bottom, 20px)
+		env(safe-area-inset-left, 20px);
 }
 
 #app {
@@ -16,13 +17,14 @@ body {
 }
 
 .content {
-	padding: 1em;
+	align-items: center;
 	display: flex;
+	flex-direction: column;
 	flex: 1;
 	justify-content: center;
 	order: 1;
-	overflow: scroll;
-	text-overflow: ellipsis;
+	/* overflow: scroll;
+	text-overflow: ellipsis; */
 }
 
 .material-symbols-outlined {
